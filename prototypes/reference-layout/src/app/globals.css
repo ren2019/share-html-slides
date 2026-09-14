@@ -114,3 +114,29 @@ body{background:#fff}.site-header{height:64px}.header-inner{max-width:none;paddi
 
 .ext-unsaved{margin-top:16px;border-top:1px solid #eef0f3;padding-top:14px}
 .ext-unsaved .relation-row{margin-top:10px}
+
+/* Anonymous landing home */
+.landing{max-width:880px;margin:auto}
+.landing-hero{padding:44px 0 30px;border-bottom:1px solid #edf0f2}
+.landing-hero h1{font-size:30px;font-weight:600;color:#242a31;margin:0 0 16px;display:block;letter-spacing:0}
+.landing-hero p{font-size:14px;line-height:2;color:#4d5966;max-width:620px;margin:0}
+.landing-cta{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
+.landing-demo{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:30px 0;border-bottom:1px solid #edf0f2}
+.demo-card{display:flex;flex-direction:column;gap:8px;border:1px solid #e3e7eb;border-radius:8px;padding:22px;background:#fff;text-decoration:none;color:inherit}
+.demo-card:hover{border-color:var(--brand-soft-border)}
+.demo-kind{font-size:10px;letter-spacing:1.5px;color:#8d97a1}
+.demo-card strong{font-size:15px;font-weight:600;color:#2d3742}
+.demo-desc{font-size:12px;line-height:1.9;color:#6d7986}
+.demo-open{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--brand-ink);margin-top:6px}
+.landing-points{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;padding:30px 0;border-bottom:1px solid #edf0f2}
+.point strong{display:block;font-size:13px;font-weight:600;color:#344250;margin:10px 0 6px}
+.point p{font-size:12px;line-height:1.9;color:#6d7986;margin:0}
+.point svg{color:#84919d}
+.landing-note{padding:24px 0 10px}
+.landing-note p{font-size:12px;line-height:2;color:#77818c;margin:0 0 8px}
+.landing-note a{color:var(--brand-ink)}
+@media(max-width:823px){.landing-points{grid-template-columns:1fr;gap:18px}.landing-hero h1{font-size:26px}}
+@media(max-width:500px){.landing-demo{grid-template-columns:1fr}.landing-hero{padding:30px 0 24px}.landing-hero h1{font-size:23px}}
+
+/* Mobile topbar: keep account/logout entry reachable */
+@media(max-width:500px){.account{display:inline-flex;padding:0 2px}.account>svg:last-child{display:none}}

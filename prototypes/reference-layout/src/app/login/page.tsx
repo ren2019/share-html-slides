@@ -108,7 +108,7 @@ export default function LoginPage(){
  const enter=(name:string,method:string)=>{setState({auth:{loggedIn:true,name,method}});router.push('/')};
  const noneConfigured=!authCfg.wechat&&!authCfg.sms;
  return <div className="shell">
- <header className="site-header"><div className="header-inner"><Link href="/" className="brand" aria-label="纸飞机"><OrigamiMark/><span>纸飞机<small>PAPERPLANE</small></span></Link><div className="header-actions"><Link href="/" className="back-link"><ArrowLeft size={15}/>返回材料库</Link></div></div></header>
+ <header className="site-header"><div className="header-inner"><Link href="/" className="brand" aria-label="纸飞机"><OrigamiMark/><span>纸飞机<small>PAPERPLANE</small></span></Link><div className="header-actions"><Link href="/" className="back-link"><ArrowLeft size={15}/>{auth.loggedIn?'返回材料库':'返回首页'}</Link></div></div></header>
  <main className="workspace auth-workspace">
  <div className="auth-card">
  <h1 className="auth-title">发布者登录</h1>

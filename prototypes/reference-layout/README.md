@@ -33,3 +33,5 @@ React Doctor：86/100，0 errors，4 warnings（原型单页分支复杂、shadc
 验证：`npm run typecheck`、`npm run build` 通过；`.scratch/implement-2-4/verify-2-4.cjs` 44 项断言全 PASS（含 1440/823/390 视口、匿名直达、SPA 状态链路）。React Doctor 复跑 86/100，回到基线；剩余 4 项为既有上游写法与原型集中状态（page.tsx 单页分支、shadcn button/badge 变体导出、progress transition-all），源码核对后保留，不作为生产代码豁免。
 
 模拟与待验边界：全部为合成数据与内存态（整页刷新即复位，预览/返回走客户端导航保状态）；无真实登录、短信、上传、存储与下载；认证与微信交互（扫码、微信内保存、复制回退）不构成真机验收，需后续真机验证。
+
+2026-09-14 匿名入口修正：匿名访问根 `/` 展示产品首页 `LandingHome`（`src/components/landing-home.tsx`）——直接说明“发布 HTML，分享阅读链接”、关联检查/同名更新稳定链接/读者免登录三要点、开源自托管说明（链接真实仓库 ren2019/share-html-slides）与“当前为交互原型”标注；主 CTA“登录并上传”→ /login；两张公开演示材料卡 → /read/3（幻灯片）、/read/2（长网页）。首页不展示私人材料列表、搜索、上传队列、管理菜单与状态 dump，保留五主题切换。登录后 `/` 仍为本人材料库；退出登录立即回产品首页并关闭残留上传弹窗。匿名 `/read/:id` 保持直达免登录；匿名态登录页返回链接为“返回首页”。验证：主代理 `.scratch/anonymous-home/verify.mjs` 24 项断言全 PASS（三尺寸、390px 登录后账户/退出入口、登录/退出闭环）；`npm run typecheck`、`npm run build` 通过；React Doctor 86/100 基线（主题菜单抽为共用 `src/components/theme-menu.tsx`，文案按自托管现状修正）。
