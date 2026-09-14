@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight, CircleAlert, FileCode2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { GithubIcon } from '@/components/github-icon';
+import { OrigamiMark } from '@/components/origami-mark';
+import { version } from '../../package.json';
 import { deckFor, articleFor, embedHtml } from '@/lib/library';
 import type { Material, Related } from '@/lib/library';
 
@@ -31,7 +33,13 @@ export function ReadContent({item,items,missing,loggedIn,onProgress}:{item:Mater
  <dt>最后更新</dt><dd>{item.updated}</dd>
  </dl></details>
  {!item.download&&<p className="dl-off">发布者已关闭下载。</p>}
- <footer className="reader-footer">{loggedIn&&<Link href="/">返回材料库</Link>}{!loggedIn&&<Button asChild className="brand-button reader-cta-mobile"><Link href="/">试试看<ArrowRight size={15}/></Link></Button>}<a className="github-link" href="https://github.com/ren2019/share-html-slides" target="_blank" rel="noreferrer" aria-label="GitHub 仓库" title="GitHub"><GithubIcon/></a></footer>
+ <footer className="reader-footer">
+ <div className="rf-top">
+ <div className="rf-brand"><Link href="/" className="rf-home"><OrigamiMark/><span>纸飞机</span></Link><span className="rf-ver">原型 v{version}</span></div>
+ <nav className="rf-links">{loggedIn?<Link href="/">返回材料库</Link>:<Link href="/" className="rf-entry">试试看<ArrowRight size={13}/></Link>}<a href="https://github.com/ren2019/share-html-slides/blob/main/LICENSE" target="_blank" rel="noreferrer">MIT</a><a className="github-link" href="https://github.com/ren2019/share-html-slides" target="_blank" rel="noreferrer" aria-label="GitHub 仓库" title="GitHub"><GithubIcon/></a></nav>
+ </div>
+ <div className="rf-bottom"><span>© 2026 ren2019 · 平台代码采用 MIT 许可</span><span>材料版权归原作者所有</span></div>
+ </footer>
  </>;
 }
 

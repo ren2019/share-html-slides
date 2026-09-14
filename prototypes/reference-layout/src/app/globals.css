@@ -22,18 +22,26 @@ body{background:#fff}.site-header{height:64px}.header-inner{max-width:none;paddi
 .reader-icon-btn{width:40px;height:40px;min-width:40px;min-height:40px;padding:0;gap:0;display:inline-flex;align-items:center;justify-content:center;color:#66707b;background:transparent;border:0;box-shadow:none;border-radius:8px;text-decoration:none}
 .reader-icon-btn:hover{background:var(--brand-soft);color:var(--brand-ink)}
 .reader-main{max-width:960px;margin:auto;padding:28px 20px calc(64px + env(safe-area-inset-bottom))}
-.reader-cta-mobile{display:none}
 .material-info{margin-top:16px;border:1px solid #e5e8eb;border-radius:7px;background:#fff;font-size:12px;color:#4d5966}
 .material-info summary{padding:11px 16px;font-weight:500;list-style-position:inside}
 .material-info dl{display:grid;grid-template-columns:max-content 1fr;gap:6px 18px;margin:0;padding:12px 16px;border-top:1px solid #eef1f3;font-variant-numeric:tabular-nums}
 .material-info dt{color:#8d97a1}.material-info dd{margin:0}
-.reader-footer{margin-top:32px;padding-top:16px;border-top:1px solid #e5e8eb;display:flex;justify-content:center;gap:22px;font-size:12px}
-.reader-footer a:not(.brand-button){color:#5d6773;text-decoration:none}
-.reader-footer a:not(.brand-button):hover{color:var(--brand-ink);text-decoration:underline;text-underline-offset:3px}
+.reader-footer{margin-top:36px;padding-top:18px;border-top:1px solid #e5e8eb;font-size:12px;color:#77818c}
+.rf-top{display:flex;justify-content:space-between;align-items:center;gap:12px 20px;flex-wrap:wrap}
+.rf-brand{display:flex;align-items:center;gap:10px}
+.rf-home{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:#424b55;text-decoration:none}
+.rf-home:hover{color:var(--brand-ink)}
+.rf-home .brand-mark{width:20px;height:20px;box-shadow:none}
+.rf-ver{font-size:11px;color:#98a0aa;border:1px solid #e3e7eb;border-radius:5px;padding:2px 7px;white-space:nowrap}
+.rf-links{display:flex;align-items:center;gap:16px}
+.rf-links a{display:inline-flex;align-items:center;gap:5px;color:#5d6773;text-decoration:none}
+.rf-links a:hover{color:var(--brand-ink)}
+.rf-bottom{display:flex;gap:6px 20px;flex-wrap:wrap;margin-top:12px;font-size:11px;color:#98a0aa}
 .read-track{flex:1;min-width:60px;height:30px;margin:0 14px;position:relative;pointer-events:none}
 .read-track>svg{position:absolute;inset:0;width:100%;height:100%}
 .track-wave{stroke:#c4ccd5;stroke-width:1.6;stroke-linecap:round;stroke-dasharray:3 5;vector-effect:non-scaling-stroke}
-.track-plane{position:absolute;top:0;left:0;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;color:var(--brand-ink);transition:transform .3s ease}
+.track-plane{position:absolute;top:0;left:0;width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;transition:transform .3s ease}
+.track-plane img{width:24px;height:24px;display:block;filter:var(--mark-filter)}
 @media(prefers-reduced-motion:reduce){.track-plane{transition:none}}
 .github-link{display:inline-flex;align-items:center;justify-content:center;min-width:32px;min-height:32px}
 .github-link:hover{text-decoration:none!important}
@@ -46,7 +54,7 @@ body{background:#fff}.site-header{height:64px}.header-inner{max-width:none;paddi
 .obm-title{color:#fff;font-size:20px;line-height:1.5}
 .obm-desc{color:#d4dae2;font-size:16px;line-height:1.9}
 .obm-body .fixture-label{color:#9aa5b1}
-@media(max-width:500px){.reader-header-inner{padding:0 12px}.reader-header-actions{gap:4px}.read-track{margin:0 6px;min-width:36px}.reader-main{padding:18px 12px calc(56px + env(safe-area-inset-bottom))}.reader-footer{flex-wrap:wrap;gap:10px 18px}.reader-cta-mobile{display:inline-flex;min-height:40px}.github-link{min-width:40px;min-height:40px}}
+@media(max-width:500px){.reader-header-inner{padding:0 12px}.reader-header-actions{gap:4px}.read-track{margin:0 6px;min-width:36px}.reader-main{padding:18px 12px calc(56px + env(safe-area-inset-bottom))}.rf-top{align-items:flex-start}.github-link{min-width:40px;min-height:40px}}
 
 /* Stacked rows: keep revision, status and both dates visible below 860px */
 @media(max-width:860px){.list-heading{display:none}.material-row{grid-template-columns:minmax(0,1fr) auto;min-height:0;padding:14px 16px}.material-row .status,.material-row .date,.material-row .rev{display:none}.row-meta{display:grid;grid-template-columns:repeat(3,max-content);justify-content:start;gap:3px 22px;font-size:10px;color:#69727c;margin-top:8px;line-height:1.6;font-variant-numeric:tabular-nums}.row-meta b{font-weight:400;color:#9aa2ab;margin-right:6px}}
