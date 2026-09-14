@@ -1,9 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { CircleCheck } from 'lucide-react';
-import { OrigamiMark } from '@/components/origami-mark';
 import { ShareDialog } from '@/components/share-dialog';
 import { ReadContent } from '@/components/read-body';
 import { ReadStatus, ReadHeaderActions } from '@/components/read-status';
@@ -38,7 +36,7 @@ export default function ReadPage(){
   return()=>{window.removeEventListener('scroll',onScroll);window.removeEventListener('resize',onScroll);if(raf)cancelAnimationFrame(raf)};
  },[status,item,isDeck]);
  return <div className="shell reader-shell">
- <header className="reader-header"><div className="reader-header-inner"><Link href="/" className="reader-brand" aria-label="纸飞机首页"><OrigamiMark/></Link>{!status&&item&&<ReadingTrack progress={progress}/>}<ReadHeaderActions item={item} canRead={!status} loggedIn={auth.loggedIn} onShare={setShare} onDownload={()=>setDl(true)}/></div></header>
+ <header className="reader-header"><div className="reader-header-inner">{!status&&item&&<ReadingTrack progress={progress}/>}<ReadHeaderActions item={item} canRead={!status} loggedIn={auth.loggedIn} onShare={setShare} onDownload={()=>setDl(true)}/></div></header>
  <main className="reader-main">
  {status?<ReadStatus kind={status} onRetry={retry} loggedIn={auth.loggedIn}/>
  :item&&<ReadContent item={item} items={items} missing={upload&&stage==='missing'} loggedIn={auth.loggedIn} onProgress={setProgress}/>}
