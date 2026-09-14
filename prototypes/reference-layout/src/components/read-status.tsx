@@ -16,8 +16,8 @@ export function ReadStatus({kind,onRetry,loggedIn}:{kind:ReadStatusKind;onRetry:
 
 export function ReadHeaderActions({item,canRead,loggedIn,onShare,onDownload}:{item:Material|undefined;canRead:boolean;loggedIn:boolean;onShare:(m:Material)=>void;onDownload:()=>void}){
  return <div className="reader-header-actions">
- {loggedIn&&<Link href="/" className="back-link reader-back" aria-label="返回材料库" title="返回材料库"><ArrowLeft size={16}/></Link>}
- {item&&canRead&&<>{item.download&&<Button variant="outline" size="sm" className="reader-icon-btn" aria-label="下载" title="下载" onClick={onDownload}><Download size={16}/></Button>}<Button size="sm" className="brand-button reader-icon-btn" aria-label="分享" title="分享" onClick={()=>onShare(item)}><Link2 size={16}/></Button></>}
- {!loggedIn&&<Button asChild size="sm" className="brand-button reader-icon-btn"><Link href="/" aria-label="试试看" title="试试看"><ArrowRight size={16}/></Link></Button>}
+ {loggedIn&&<Link href="/" className="reader-icon-btn" aria-label="返回材料库" title="返回材料库"><ArrowLeft size={17}/></Link>}
+ {item&&canRead&&<>{item.download&&<Button variant="ghost" size="icon" className="reader-icon-btn" aria-label="下载" title="下载" onClick={onDownload}><Download size={17}/></Button>}<Button variant="ghost" size="icon" className="reader-icon-btn" aria-label="分享" title="分享" onClick={()=>onShare(item)}><Link2 size={17}/></Button></>}
+ {!loggedIn&&<Button asChild variant="ghost" size="icon" className="reader-icon-btn"><Link href="/" aria-label="试试看" title="试试看"><ArrowRight size={17}/></Link></Button>}
  </div>;
 }
