@@ -9,6 +9,7 @@ import { ReadContent } from '@/components/read-body';
 import { ReadStatus, ReadHeaderActions } from '@/components/read-status';
 import type { ReadStatusKind } from '@/components/read-status';
 import { DownloadDialog } from '@/components/download-dialog';
+import { ReadingTrack } from '@/components/reading-progress';
 import { useLibrary, useThemeSync } from '@/lib/library';
 import type { Material } from '@/lib/library';
 
@@ -20,15 +21,27 @@ export default function ReadPage(){
  const failOnce=useRef(false);
  const [load,setLoad]=useState<'loading'|'error'|'ready'>('loading');
  const [share,setShare]=useState<Material|null>(null),[toast,setToast]=useState(''),[dl,setDl]=useState(false);
- useEffect(()=>{failOnce.current=new URLSearchParams(window.location.search).get('fail')==='1';setLoad('loading');const t=setTimeout(()=>setLoad(failOnce.current?'error':'ready'),550);return()=>clearTimeout(t)},[params.id]);
+ const [progress,setProgress]=useState(0);
+ useEffect(()=>{failOnce.current=new URLSearchParams(window.location.search).get('fail')==='1';setLoad('loading');setProgress(0);const t=setTimeout(()=>setLoad(failOnce.current?'error':'ready'),550);return()=>clearTimeout(t)},[params.id]);
  useEffect(()=>{if(!toast)return;const t=setTimeout(()=>setToast(''),3200);return()=>clearTimeout(t)},[toast]);
  const retry=()=>{failOnce.current=false;setLoad('loading');setTimeout(()=>setLoad('ready'),450)};
  const status:ReadStatusKind|null=load!=='ready'?load:!item?'missing':item.stopped?'stopped':null;
+ const isDeck=item?.kind==='幻灯片';
+ useEffect(()=>{
+  if(status||!item||isDeck)return;
+  let raf=0;
+  const calc=()=>{raf=0;const max=document.documentElement.scrollHeight-window.innerHeight;setProgress(max>0?Math.min(1,Math.max(0,window.scrollY/max)):0)};
+  const onScroll=()=>{if(!raf)raf=requestAnimationFrame(calc)};
+  calc();
+  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('resize',onScroll);
+  return()=>{window.removeEventListener('scroll',onScroll);window.removeEventListener('resize',onScroll);if(raf)cancelAnimationFrame(raf)};
+ },[status,item,isDeck]);
  return <div className="shell reader-shell">
- <header className="reader-header"><div className="reader-header-inner"><Link href="/" className="reader-brand" aria-label="纸飞机首页"><OrigamiMark/><span>纸飞机</span></Link><ReadHeaderActions item={item} canRead={!status} loggedIn={auth.loggedIn} onShare={setShare} onDownload={()=>setDl(true)}/></div></header>
+ <header className="reader-header"><div className="reader-header-inner"><Link href="/" className="reader-brand" aria-label="纸飞机首页"><OrigamiMark/></Link>{!status&&item&&<ReadingTrack progress={progress}/>}<ReadHeaderActions item={item} canRead={!status} loggedIn={auth.loggedIn} onShare={setShare} onDownload={()=>setDl(true)}/></div></header>
  <main className="reader-main">
  {status?<ReadStatus kind={status} onRetry={retry} loggedIn={auth.loggedIn}/>
- :item&&<ReadContent item={item} items={items} missing={upload&&stage==='missing'} loggedIn={auth.loggedIn}/>}
+ :item&&<ReadContent item={item} items={items} missing={upload&&stage==='missing'} loggedIn={auth.loggedIn} onProgress={setProgress}/>}
  </main>
  {share&&<ShareDialog item={share} onClose={()=>setShare(null)} onFallback={setToast}/>}
  {item&&<DownloadDialog item={item} open={dl} onClose={()=>setDl(false)} onToast={setToast}/>}
