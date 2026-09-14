@@ -19,7 +19,6 @@ function RelatedBlock({rel,items}:{rel:Related;items:Material[]}){
 
 export function ReadContent({item,items,missing,loggedIn}:{item:Material;items:Material[];missing:boolean;loggedIn:boolean}){
  return <>
- <header className="reader-head"><h1 className="reader-title">{item.title}</h1><p className="reader-sub">由 演示发布者 分享 · 更新于 {item.updated}</p></header>
  <ReadBody item={item} items={items}/>
  {missing&&<p className="missing-label read-missing"><CircleAlert size={14}/>关联内容未补齐，预览不完整。</p>}
  <details className="material-info"><summary>材料信息</summary><dl>
@@ -31,7 +30,7 @@ export function ReadContent({item,items,missing,loggedIn}:{item:Material;items:M
  <dt>最后更新</dt><dd>{item.updated}</dd>
  </dl></details>
  {!item.download&&<p className="dl-off">发布者已关闭下载。</p>}
- <footer className="reader-footer">{loggedIn?<Link href="/">返回材料库</Link>:<Link href="/login">使用纸飞机发布内容</Link>}<Link href="/">了解纸飞机</Link></footer>
+ <footer className="reader-footer">{loggedIn?<Link href="/">返回材料库</Link>:<><Button asChild className="brand-button reader-cta-mobile"><Link href="/">使用纸飞机</Link></Button><Link href="/" className="reader-cta-desktop">了解纸飞机</Link></>}</footer>
  </>;
 }
 

@@ -18,5 +18,6 @@ export function ReadHeaderActions({item,canRead,loggedIn,onShare,onDownload}:{it
  return <div className="reader-header-actions">
  {loggedIn&&<Link href="/" className="back-link reader-back" aria-label="返回材料库"><ArrowLeft size={15}/><span>返回材料库</span></Link>}
  {item&&canRead&&<>{item.download&&<Button variant="outline" size="sm" onClick={onDownload}><Download size={14}/>下载</Button>}<Button size="sm" className="brand-button" onClick={()=>onShare(item)}><Link2 size={14}/>分享</Button></>}
+ {!loggedIn&&<Button asChild size="sm" className="brand-button reader-cta"><Link href="/">使用纸飞机</Link></Button>}
  </div>;
 }
