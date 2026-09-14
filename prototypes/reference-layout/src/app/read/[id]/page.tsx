@@ -24,9 +24,9 @@ export default function ReadPage(){
  useEffect(()=>{if(!toast)return;const t=setTimeout(()=>setToast(''),3200);return()=>clearTimeout(t)},[toast]);
  const retry=()=>{failOnce.current=false;setLoad('loading');setTimeout(()=>setLoad('ready'),450)};
  const status:ReadStatusKind|null=load!=='ready'?load:!item?'missing':item.stopped?'stopped':null;
- return <div className="shell">
- <header className="site-header"><div className="header-inner"><Link href="/" className="brand" aria-label="纸飞机"><OrigamiMark/><span>纸飞机<small>PAPERPLANE</small></span></Link><ReadHeaderActions item={item} canRead={!status} loggedIn={auth.loggedIn} onShare={setShare} onDownload={()=>setDl(true)}/></div></header>
- <main className="workspace read-workspace">
+ return <div className="shell reader-shell">
+ <header className="reader-header"><div className="reader-header-inner"><Link href="/" className="reader-brand" aria-label="纸飞机首页"><OrigamiMark/><span>纸飞机</span></Link><ReadHeaderActions item={item} canRead={!status} loggedIn={auth.loggedIn} onShare={setShare} onDownload={()=>setDl(true)}/></div></header>
+ <main className="reader-main">
  {status?<ReadStatus kind={status} onRetry={retry} loggedIn={auth.loggedIn}/>
  :item&&<ReadContent item={item} items={items} missing={upload&&stage==='missing'} loggedIn={auth.loggedIn}/>}
  </main>

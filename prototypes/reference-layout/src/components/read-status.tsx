@@ -15,5 +15,8 @@ export function ReadStatus({kind,onRetry,loggedIn}:{kind:ReadStatusKind;onRetry:
 }
 
 export function ReadHeaderActions({item,canRead,loggedIn,onShare,onDownload}:{item:Material|undefined;canRead:boolean;loggedIn:boolean;onShare:(m:Material)=>void;onDownload:()=>void}){
- return <div className="header-actions">{item&&canRead&&<><Button variant="outline" size="sm" onClick={()=>onShare(item)}><Link2 size={14}/>分享</Button>{item.download&&<Button variant="outline" size="sm" onClick={onDownload}><Download size={14}/>下载</Button>}</>}{loggedIn?<Link href="/" className="back-link"><ArrowLeft size={15}/>返回材料库</Link>:<Link href="/login" className="back-link">发布者登录</Link>}</div>;
+ return <div className="reader-header-actions">
+ {loggedIn&&<Link href="/" className="back-link reader-back" aria-label="返回材料库"><ArrowLeft size={15}/><span>返回材料库</span></Link>}
+ {item&&canRead&&<>{item.download&&<Button variant="outline" size="sm" onClick={onDownload}><Download size={14}/>下载</Button>}<Button size="sm" className="brand-button" onClick={()=>onShare(item)}><Link2 size={14}/>分享</Button></>}
+ </div>;
 }

@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, ArrowUpRight, ChevronLeft, ChevronRight, CircleAlert, FileCode2 } from 'lucide-react';
+import { ArrowUpRight, ChevronLeft, ChevronRight, CircleAlert, FileCode2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { deckFor, articleFor, embedHtml } from '@/lib/library';
 import type { Material, Related } from '@/lib/library';
@@ -19,10 +19,19 @@ function RelatedBlock({rel,items}:{rel:Related;items:Material[]}){
 
 export function ReadContent({item,items,missing,loggedIn}:{item:Material;items:Material[];missing:boolean;loggedIn:boolean}){
  return <>
- <div className="read-meta"><span>材料 #{item.id} / {item.kind}</span><span>r{item.revision}</span><span>{item.file}</span><span>首次上传 {item.created}</span><span>最后更新 {item.updated}</span></div>
+ <header className="reader-head"><h1 className="reader-title">{item.title}</h1><p className="reader-sub">由 演示发布者 分享 · 更新于 {item.updated}</p></header>
  <ReadBody item={item} items={items}/>
  {missing&&<p className="missing-label read-missing"><CircleAlert size={14}/>关联内容未补齐，预览不完整。</p>}
- <div className="read-actions">{loggedIn&&<Link href="/" className="back-link"><ArrowLeft size={14}/>返回材料库</Link>}{!item.download&&<span className="dl-off">发布者已关闭下载。</span>}</div>
+ <details className="material-info"><summary>材料信息</summary><dl>
+ <dt>材料编号</dt><dd>材料 #{item.id}</dd>
+ <dt>类型</dt><dd>{item.kind}</dd>
+ <dt>文件名</dt><dd>{item.file}</dd>
+ <dt>当前版本</dt><dd>r{item.revision}</dd>
+ <dt>首次上传</dt><dd>{item.created}</dd>
+ <dt>最后更新</dt><dd>{item.updated}</dd>
+ </dl></details>
+ {!item.download&&<p className="dl-off">发布者已关闭下载。</p>}
+ <footer className="reader-footer">{loggedIn?<Link href="/">返回材料库</Link>:<Link href="/login">使用纸飞机发布内容</Link>}<Link href="/">了解纸飞机</Link></footer>
  </>;
 }
 
