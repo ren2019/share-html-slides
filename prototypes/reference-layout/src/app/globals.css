@@ -31,6 +31,10 @@ body{background:#fff}.site-header{height:64px}.header-inner{max-width:none;paddi
 .reader-footer{margin-top:32px;padding-top:16px;border-top:1px solid #e5e8eb;display:flex;justify-content:center;gap:22px;font-size:12px}
 .reader-footer a:not(.brand-button){color:#5d6773;text-decoration:none}
 .reader-footer a:not(.brand-button):hover{color:var(--brand-ink);text-decoration:underline;text-underline-offset:3px}
+.try-icon{position:relative;display:inline-flex;margin-left:8px}
+.try-icon::before{content:"";position:absolute;left:-8px;bottom:1px;width:10px;border-top:1.6px dashed currentColor;transform:rotate(-38deg);opacity:.7}
+.github-link{display:inline-flex;align-items:center;justify-content:center;min-width:32px;min-height:32px}
+.github-link:hover{text-decoration:none!important}
 .article section{scroll-margin-top:64px}
 [data-slot=dialog-content].open-browser-guide{position:fixed;inset:0;top:0!important;left:0!important;translate:0 0!important;transform:none!important;animation:none;max-width:none!important;max-height:none!important;width:100%;height:100vh;height:100dvh;border:0;border-radius:0;background:#0f141ae6;box-shadow:none;display:flex;flex-direction:column;gap:0;padding:calc(10px + env(safe-area-inset-top)) 18px 0}
 .open-browser-guide [data-slot=dialog-close]{color:#fff;opacity:.8}
@@ -40,7 +44,7 @@ body{background:#fff}.site-header{height:64px}.header-inner{max-width:none;paddi
 .obm-title{color:#fff;font-size:20px;line-height:1.5}
 .obm-desc{color:#d4dae2;font-size:16px;line-height:1.9}
 .obm-body .fixture-label{color:#9aa5b1}
-@media(max-width:500px){.reader-header-inner{padding:0 12px}.reader-header-actions{gap:4px}.reader-header-actions button{min-height:40px}.reader-header-actions .reader-cta{display:none}.reader-back{min-width:40px;min-height:40px;justify-content:center}.reader-back span{display:none}.reader-main{padding:18px 12px calc(56px + env(safe-area-inset-bottom))}.reader-footer{flex-wrap:wrap;gap:10px 18px}.reader-cta-mobile{display:inline-flex;min-height:40px}.reader-cta-desktop{display:none}}
+@media(max-width:500px){.reader-header-inner{padding:0 12px}.reader-header-actions{gap:4px}.reader-header-actions button{min-height:40px}.reader-header-actions .reader-cta{display:none}.reader-back{min-width:40px;min-height:40px;justify-content:center}.reader-back span{display:none}.reader-main{padding:18px 12px calc(56px + env(safe-area-inset-bottom))}.reader-footer{flex-wrap:wrap;gap:10px 18px}.reader-cta-mobile{display:inline-flex;min-height:40px}.github-link{min-width:40px;min-height:40px}}
 
 /* Stacked rows: keep revision, status and both dates visible below 860px */
 @media(max-width:860px){.list-heading{display:none}.material-row{grid-template-columns:minmax(0,1fr) auto;min-height:0;padding:14px 16px}.material-row .status,.material-row .date,.material-row .rev{display:none}.row-meta{display:grid;grid-template-columns:repeat(3,max-content);justify-content:start;gap:3px 22px;font-size:10px;color:#69727c;margin-top:8px;line-height:1.6;font-variant-numeric:tabular-nums}.row-meta b{font-weight:400;color:#9aa2ab;margin-right:6px}}

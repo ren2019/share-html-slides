@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { ArrowUpRight, ChevronLeft, ChevronRight, CircleAlert, FileCode2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { TryPlaneIcon } from '@/components/try-plane-icon';
+import { GithubIcon } from '@/components/github-icon';
 import { deckFor, articleFor, embedHtml } from '@/lib/library';
 import type { Material, Related } from '@/lib/library';
 
@@ -30,7 +32,7 @@ export function ReadContent({item,items,missing,loggedIn}:{item:Material;items:M
  <dt>最后更新</dt><dd>{item.updated}</dd>
  </dl></details>
  {!item.download&&<p className="dl-off">发布者已关闭下载。</p>}
- <footer className="reader-footer">{loggedIn?<Link href="/">返回材料库</Link>:<><Button asChild className="brand-button reader-cta-mobile"><Link href="/">使用纸飞机</Link></Button><Link href="/" className="reader-cta-desktop">了解纸飞机</Link></>}</footer>
+ <footer className="reader-footer">{loggedIn&&<Link href="/">返回材料库</Link>}{!loggedIn&&<Button asChild className="brand-button reader-cta-mobile"><Link href="/"><TryPlaneIcon size={15}/>试试纸飞机</Link></Button>}<a className="github-link" href="https://github.com/ren2019/share-html-slides" target="_blank" rel="noreferrer" aria-label="GitHub 仓库" title="GitHub"><GithubIcon/></a></footer>
  </>;
 }
 
