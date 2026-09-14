@@ -39,7 +39,7 @@ export default function ReadPage(){
  <header className="reader-header"><div className="reader-header-inner">{!status&&item&&<ReadingTrack progress={progress}/>}<ReadHeaderActions item={item} canRead={!status} loggedIn={auth.loggedIn} onShare={setShare} onDownload={()=>setDl(true)}/></div></header>
  <main className="reader-main">
  {status?<ReadStatus kind={status} onRetry={retry} loggedIn={auth.loggedIn}/>
- :item&&<ReadContent item={item} items={items} missing={upload&&stage==='missing'} loggedIn={auth.loggedIn} onProgress={setProgress}/>}
+ :item&&<ReadContent item={item} items={items} missing={upload&&stage==='missing'} onProgress={setProgress}/>}
  </main>
  {share&&<ShareDialog item={share} onClose={()=>setShare(null)} onFallback={setToast}/>}
  {item&&<DownloadDialog item={item} open={dl} onClose={()=>setDl(false)} onToast={setToast}/>}

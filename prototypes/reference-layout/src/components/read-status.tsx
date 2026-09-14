@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { ArrowLeft, ArrowRight, BookOpen, CircleAlert, Download, Link2, Loader2 } from 'lucide-react';
+import { ArrowLeft, ArrowRight, BookOpen, CircleAlert, Download, Loader2, Share2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import type { Material } from '@/lib/library';
 
@@ -17,7 +17,7 @@ export function ReadStatus({kind,onRetry,loggedIn}:{kind:ReadStatusKind;onRetry:
 export function ReadHeaderActions({item,canRead,loggedIn,onShare,onDownload}:{item:Material|undefined;canRead:boolean;loggedIn:boolean;onShare:(m:Material)=>void;onDownload:()=>void}){
  return <div className="reader-header-actions">
  {loggedIn&&<Link href="/" className="reader-icon-btn" aria-label="返回材料库" title="返回材料库"><ArrowLeft size={17}/></Link>}
- {item&&canRead&&<>{item.download&&<Button variant="ghost" size="icon" className="reader-icon-btn" aria-label="下载" title="下载" onClick={onDownload}><Download size={17}/></Button>}<Button variant="ghost" size="icon" className="reader-icon-btn" aria-label="分享" title="分享" onClick={()=>onShare(item)}><Link2 size={17}/></Button></>}
+ {item&&canRead&&<>{item.download&&<Button variant="ghost" size="icon" className="reader-icon-btn" aria-label="下载" title="下载" onClick={onDownload}><Download size={17}/></Button>}<Button variant="ghost" size="icon" className="reader-icon-btn" aria-label="分享" title="分享" onClick={()=>onShare(item)}><Share2 size={17}/></Button></>}
  {!loggedIn&&<Button asChild variant="ghost" size="icon" className="reader-icon-btn"><Link href="/" aria-label="试试看" title="试试看"><ArrowRight size={17}/></Link></Button>}
  </div>;
 }

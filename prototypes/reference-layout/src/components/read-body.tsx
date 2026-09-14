@@ -1,7 +1,7 @@
 'use client';
 import { useCallback, useEffect, useEffectEvent, useMemo, useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight, CircleAlert, FileCode2 } from 'lucide-react';
+import { ArrowUpRight, ChevronLeft, ChevronRight, CircleAlert, FileCode2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { GithubIcon } from '@/components/github-icon';
 import { OrigamiMark } from '@/components/origami-mark';
@@ -20,7 +20,7 @@ function RelatedBlock({rel,items}:{rel:Related;items:Material[]}){
  return <figure className="embed-wrap"><iframe sandbox="" srcDoc={embedHtml(target)} title={rel.file} className="embed-frame"/><figcaption>嵌入关联材料：{rel.file} · r{target.revision}{target.stopped?' · 已停止分享':''} · <Link href={`/read/${target.id}`}>打开完整内容</Link></figcaption></figure>;
 }
 
-export function ReadContent({item,items,missing,loggedIn,onProgress}:{item:Material;items:Material[];missing:boolean;loggedIn:boolean;onProgress:(n:number)=>void}){
+export function ReadContent({item,items,missing,onProgress}:{item:Material;items:Material[];missing:boolean;onProgress:(n:number)=>void}){
  return <>
  <ReadBody item={item} items={items} onProgress={onProgress}/>
  {missing&&<p className="missing-label read-missing"><CircleAlert size={14}/>关联内容未补齐，预览不完整。</p>}
@@ -36,9 +36,9 @@ export function ReadContent({item,items,missing,loggedIn,onProgress}:{item:Mater
  <footer className="reader-footer">
  <div className="rf-top">
  <div className="rf-brand"><Link href="/" className="rf-home"><OrigamiMark/><span>纸飞机</span></Link><span className="rf-ver">原型 v{version}</span></div>
- <nav className="rf-links">{loggedIn?<Link href="/">返回材料库</Link>:<Link href="/" className="rf-entry">试试看<ArrowRight size={13}/></Link>}<a href="https://github.com/ren2019/share-html-slides/blob/main/LICENSE" target="_blank" rel="noreferrer">MIT</a><a className="github-link" href="https://github.com/ren2019/share-html-slides" target="_blank" rel="noreferrer" aria-label="GitHub 仓库" title="GitHub"><GithubIcon/></a></nav>
+ <a className="github-link" href="https://github.com/ren2019/share-html-slides" target="_blank" rel="noreferrer" aria-label="GitHub 仓库" title="GitHub"><GithubIcon/></a>
  </div>
- <div className="rf-bottom"><span>© 2026 ren2019 · 平台代码采用 MIT 许可</span><span>材料版权归原作者所有</span></div>
+ <div className="rf-bottom"><span>© 2026 ren2019 · <a href="https://github.com/ren2019/share-html-slides/blob/main/LICENSE" target="_blank" rel="noreferrer">MIT</a></span><span>材料版权归原作者所有</span></div>
  </footer>
  </>;
 }
