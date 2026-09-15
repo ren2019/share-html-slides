@@ -180,3 +180,10 @@ body{background:#fff}.site-header{height:64px}.header-inner{max-width:none;paddi
 
 /* Mobile topbar: keep account/logout entry reachable */
 @media(max-width:500px){.account{display:inline-flex;padding:0 2px}.account>svg:last-child{display:none}}
+
+/* Reader chrome slides away without moving the document underneath. */
+.reader-header{transition:transform 220ms ease,opacity 220ms ease}
+.reader-header[data-hidden=true]{transform:translateY(-100%);opacity:0;pointer-events:none}
+.reader-try-button{height:36px;padding:0 14px;border:0;background:var(--brand-ink);color:#fff;border-radius:8px;white-space:nowrap;font-size:12px;box-shadow:none}
+.reader-try-button:hover{background:var(--brand-ink);opacity:.88}
+@media(prefers-reduced-motion:reduce){.reader-header{transition:none}}

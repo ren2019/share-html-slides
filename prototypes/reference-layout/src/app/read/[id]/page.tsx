@@ -7,6 +7,7 @@ import { ReadContent } from '@/components/read-body';
 import { ReadStatus, ReadHeaderActions } from '@/components/read-status';
 import type { ReadStatusKind } from '@/components/read-status';
 import { DownloadDialog } from '@/components/download-dialog';
+import { useReaderChrome } from '@/lib/use-reader-chrome';
 import { ReadingTrack } from '@/components/reading-progress';
 import { useLibrary, useThemeSync } from '@/lib/library';
 import type { Material } from '@/lib/library';
@@ -25,6 +26,7 @@ export default function ReadPage(){
  const retry=()=>{failOnce.current=false;setLoad('loading');setTimeout(()=>setLoad('ready'),450)};
  const status:ReadStatusKind|null=load!=='ready'?load:!item?'missing':item.stopped?'stopped':null;
  const isDeck=item?.kind==='幻灯片';
+ const { hidden:chromeHidden, mainRef }=useReaderChrome(!status&&!share&&!dl,params.id);
  useEffect(()=>{
   if(status||!item||isDeck)return;
   let raf=0;
@@ -36,8 +38,8 @@ export default function ReadPage(){
   return()=>{window.removeEventListener('scroll',onScroll);window.removeEventListener('resize',onScroll);if(raf)cancelAnimationFrame(raf)};
  },[status,item,isDeck]);
  return <div className="shell reader-shell">
- <header className="reader-header"><div className="reader-header-inner">{!status&&item&&<ReadingTrack progress={progress}/>}<ReadHeaderActions item={item} canRead={!status} loggedIn={auth.loggedIn} onShare={setShare} onDownload={()=>setDl(true)}/></div></header>
- <main className="reader-main">
+ <header className="reader-header" data-hidden={chromeHidden} inert={chromeHidden}><div className="reader-header-inner">{!status&&item&&<ReadingTrack progress={progress}/>}<ReadHeaderActions item={item} canRead={!status} loggedIn={auth.loggedIn} onShare={setShare} onDownload={()=>setDl(true)}/></div></header>
+ <main className="reader-main" ref={mainRef}>
  {status?<ReadStatus kind={status} onRetry={retry} loggedIn={auth.loggedIn}/>
  :item&&<ReadContent item={item} items={items} missing={upload&&stage==='missing'} onProgress={setProgress}/>}
  </main>

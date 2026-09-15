@@ -53,3 +53,5 @@ React Doctor：86/100，0 errors，4 warnings（原型单页分支复杂、shadc
 2026-09-15 飞行 icon 追加修正：改用 Lucide Send 标准朝右上纸飞机轮廓（不旋转、不自造水平箭头）：Send 外轮廓路径直接 fill=currentColor（brand-ink 实心主题色），折线 `m21.854 2.147-10.94 10.939` 以白色描边形成切面负形。ghost 工具栏与低调虚线轨迹不变。typecheck/build 通过。
 
 2026-09-15 阅读页收口：1) ReadingTrack 飞行 icon 换为主代理 imagegen 按定稿 01 飞机重绘的透明 PNG（public/brand/plane-ink.png），用 `<img>` 保留折面、无底板，24px 显示使有效飞机约 20px 可辨，主题适配沿用 `--mark-filter` CSS 滤镜，不再另造轮廓；轨迹进度与 ghost 工具栏不变。2) reader-footer 按品牌/开源/版权分层重做：上行左侧 OrigamiMark + “纸飞机”链接首页 + “原型 v1.0.0”（直接 import 本工程 package.json 的 version，非冒充正式 release），右侧 试试看（匿名，低调文字+箭头）/返回材料库（登录态）、MIT 文字链（→ 仓库 LICENSE）、GitHub icon-only（title/aria 保留）；下行小字 “© 2026 ren2019 · 平台代码采用 MIT 许可” 与 “材料版权归原作者所有”。无虚构隐私/条款/备案链接，无社交或文档空入口；footer 不固定、不遮正文，桌面左右布局、手机 flex-wrap 自然换行。正文样式未动。typecheck/build 通过；React Doctor 86/100 基线四项不变；浏览器由主代理 CUA 验收。
+
+2026-09-15 阅读器显隐：顶栏入口恢复反色“试试看”文字按钮。正文中央区域短按切换整个吸顶栏向上滑出/滑回，不改变正文占位；仅合成长文/幻灯片非交互区触发，排除控件、链接、滚动、拖拽、长按与文字选择，Esc/Tab 恢复工具栏，切换材料与打开弹窗时复位。减少动态效果偏好下立即切换。iframe 内事件不穿透到平台；此原型不代表微信真机或任意用户 HTML 的事件适配已验收。CUA 验证两次点击显隐、正文位置稳定与翻页正常；TypeScript、构建通过，Doctor 86/100 基线无新增。本轮 Kimi 授权失效，由主代理实现。
