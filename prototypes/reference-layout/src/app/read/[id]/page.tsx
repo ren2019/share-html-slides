@@ -1,6 +1,7 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { Suspense, useEffect, useRef, useState } from 'react';
+import { useParams, useSearchParams } from 'next/navigation';
+import { ReviewPrototype } from '@/components/review-prototype';
 import { CircleCheck } from 'lucide-react';
 import { ShareDialog } from '@/components/share-dialog';
 import { ReadContent } from '@/components/read-body';
@@ -12,8 +13,10 @@ import { ReadingTrack } from '@/components/reading-progress';
 import { useLibrary, useThemeSync } from '@/lib/library';
 import type { Material } from '@/lib/library';
 
-export default function ReadPage(){
+export default function ReadPage(){return <Suspense fallback={<p>正在加载材料…</p>}><ReadPageContent/></Suspense>}
+function ReadPageContent(){
  useThemeSync();
+ const reviewMode=useSearchParams().has("variant");
  const {items,upload,stage,auth}=useLibrary();
  const params=useParams<{id:string}>();
  const item=items.find(i=>i.id===Number(params.id));
@@ -26,7 +29,7 @@ export default function ReadPage(){
  const retry=()=>{failOnce.current=false;setLoad('loading');setTimeout(()=>setLoad('ready'),450)};
  const status:ReadStatusKind|null=load!=='ready'?load:!item?'missing':item.stopped?'stopped':null;
  const isDeck=item?.kind==='幻灯片';
- const { hidden:chromeHidden, mainRef }=useReaderChrome(!status&&!share&&!dl,params.id);
+ const { hidden:chromeHidden, mainRef }=useReaderChrome(!status&&!share&&!dl&&!reviewMode,params.id);
  useEffect(()=>{
   if(status||!item||isDeck)return;
   let raf=0;
@@ -41,7 +44,7 @@ export default function ReadPage(){
  <header className="reader-header" data-hidden={chromeHidden} inert={chromeHidden}><div className="reader-header-inner">{!status&&item&&<ReadingTrack progress={progress}/>}<ReadHeaderActions item={item} canRead={!status} loggedIn={auth.loggedIn} onShare={setShare} onDownload={()=>setDl(true)}/></div></header>
  <main className="reader-main" ref={mainRef}>
  {status?<ReadStatus kind={status} onRetry={retry} loggedIn={auth.loggedIn}/>
- :item&&<ReadContent item={item} items={items} missing={upload&&stage==='missing'} onProgress={setProgress}/>}
+ :item&&(reviewMode?<Suspense fallback={null}><ReviewPrototype key={item.id} initialVersion={item.revision}><ReadContent item={item} items={items} missing={false} onProgress={setProgress}/></ReviewPrototype></Suspense>:<ReadContent item={item} items={items} missing={upload&&stage==='missing'} onProgress={setProgress}/>)}
  </main>
  {share&&<ShareDialog item={share} onClose={()=>setShare(null)} onFallback={setToast}/>}
  {item&&<DownloadDialog item={item} open={dl} onClose={()=>setDl(false)} onToast={setToast}/>}

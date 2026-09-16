@@ -48,6 +48,7 @@ export function ReadBody({item,items,onProgress}:{item:Material;items:Material[]
  const deck=useMemo(()=>item.kind==='幻灯片'?deckFor(item):null,[item]);
  const go=useCallback((n:number)=>{if(!deck)return;const v=Math.min(Math.max(n,0),deck.length-1);setIdx(v);onProgress?.(deck.length>1?v/(deck.length-1):1)},[deck,onProgress]);
  const onKey=useEffectEvent((e:KeyboardEvent)=>{
+  if((e.target as HTMLElement).closest('input,textarea,select,[contenteditable]'))return;
   if(e.key==='ArrowRight')go(idx+1);
   if(e.key==='ArrowLeft')go(idx-1);
  });
