@@ -9,3 +9,9 @@ reverse-engineering/
 docs/product/
 docs/brand/directions.md
 docs/brand/color-references.md
+.next/
+playwright-report/
+test-results/
+*.tsbuildinfo
+.next-disabled/
+.next-restart/

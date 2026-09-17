@@ -1,0 +1,11 @@
+.git
+node_modules
+.next*
+.env*
+!.env.example
+.scratch
+reverse-engineering
+prototypes
+test-results
+playwright-report
+*.tsbuildinfo
