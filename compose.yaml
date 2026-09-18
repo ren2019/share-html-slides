@@ -1,0 +1,37 @@
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: paperplane
+      POSTGRES_USER: paperplane
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U paperplane -d paperplane"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+  app:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3000:3000"
+    environment:
+      APP_URL: ${APP_URL:?Set the HTTPS management origin}
+      DATABASE_URL: ${DATABASE_URL:?Set DATABASE_URL with hostname db}
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:?Generate a random authentication secret}
+      SMS_GATEWAY_URL: ${SMS_GATEWAY_URL:-}
+      SMS_GATEWAY_TOKEN: ${SMS_GATEWAY_TOKEN:-}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_SECURE: ${SMTP_SECURE:-false}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      SMTP_FROM: ${SMTP_FROM:-}
+    depends_on:
+      db:
+        condition: service_healthy
+volumes:
+  postgres:
