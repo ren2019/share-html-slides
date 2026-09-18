@@ -37,7 +37,9 @@
     ".next-disabled/types/**/*.ts",
     ".next-disabled/dev/types/**/*.ts",
     ".next-restart/types/**/*.ts",
-    ".next-restart/dev/types/**/*.ts"
+    ".next-restart/dev/types/**/*.ts",
+    ".next-email-only/types/**/*.ts",
+    ".next-email-only/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

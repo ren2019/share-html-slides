@@ -12,5 +12,8 @@ export function config() {
     if (deploymentURL(baseURL).protocol !== 'https:') throw new Error('Production APP_URL must use HTTPS');
     if (smsURL && deploymentURL(smsURL).protocol !== 'https:') throw new Error('Production SMS gateway must use HTTPS');
   }
-  return { baseURL, secret, databaseURL: process.env.DATABASE_URL, smsURL, smsToken, smsEnabled: Boolean(smsURL && smsToken) };
+  const smtp = { host: process.env.SMTP_HOST, port: Number(process.env.SMTP_PORT || 587), secure: process.env.SMTP_SECURE === 'true', user: process.env.SMTP_USER, password: process.env.SMTP_PASSWORD, from: process.env.SMTP_FROM };
+  const emailEnabled = Boolean(smtp.host && smtp.from && smtp.user && smtp.password);
+  if (emailEnabled && (!Number.isInteger(smtp.port) || smtp.port < 1 || smtp.port > 65535)) throw new Error('SMTP_PORT must be a valid port');
+  return { smtp, emailEnabled, baseURL, secret, databaseURL: process.env.DATABASE_URL, smsURL, smsToken, smsEnabled: Boolean(smsURL && smsToken) };
 }
