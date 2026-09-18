@@ -38,7 +38,7 @@ docker compose exec -T db pg_dump -U paperplane -d paperplane -Fc > paperplane.d
 docker compose exec -T db pg_restore -U paperplane -d paperplane --no-owner --exit-on-error < paperplane.dump
 ```
 
-首次部署必须实际演练备份恢复，仓库中的 Compose 文件未经当前无 Docker 的开发机运行验证。
+首次部署必须实际演练备份恢复。2026-09-18 已在 mini 使用 Node 24 镜像与独立 Compose 项目验证构建、迁移和启动；本地验收覆盖应用与数据库容器重启后身份及材料库读取。该结果不代表真实发码、手机 HTTPS、备份恢复或全部发行验收通过，详见 `docs/reviews/2026-09-18-identity-mini.md`。
 
 ## 短信网关契约与接入边界
 
