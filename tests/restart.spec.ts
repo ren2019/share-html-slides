@@ -5,7 +5,7 @@ import { fixtureSQL } from './fixtures';
 let application: ChildProcess;
 async function startApplication() {
   application = spawn(process.execPath, ['node_modules/next/dist/bin/next', 'dev', '--hostname', '127.0.0.1', '--port', '3214'], {
-    detached: true, stdio: 'ignore', env: { ...process.env, DATABASE_URL: process.env.TEST_DATABASE_URL, APP_URL: 'http://127.0.0.1:3214', BETTER_AUTH_SECRET: 'integration-only-secret-not-for-production', SMS_GATEWAY_URL: 'http://127.0.0.1:3212/send', SMS_GATEWAY_TOKEN: 'integration-only', NEXT_DIST_DIR: '.next-restart' },
+    detached: true, stdio: 'ignore', env: { ...process.env, DATABASE_URL: process.env.TEST_DATABASE_URL, APP_URL: 'http://127.0.0.1:3214', BETTER_AUTH_SECRET: 'integration-only-secret-not-for-production', SMS_GATEWAY_URL: 'http://127.0.0.1:3212/send', SMS_GATEWAY_TOKEN: 'integration-only', NEXT_DIST_DIR: '.next-restart', SMTP_HOST: '', SMTP_USER: '', SMTP_PASSWORD: '', SMTP_FROM: '' },
   });
   await expect.poll(async () => { try { return (await fetch('http://127.0.0.1:3214/login')).status; } catch { return 0; } }, { timeout: 30_000 }).toBe(200);
 }

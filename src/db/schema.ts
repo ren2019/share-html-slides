@@ -27,3 +27,8 @@ export const material = pgTable('materials', {
   id: text('id').primaryKey(), ownerId: text('owner_id').notNull().references(() => user.id, { onDelete: 'cascade' }),
   title: text('title').notNull(), originalFilename: text('original_filename').notNull(), ...timestamps,
 }, table => [index('materials_owner_idx').on(table.ownerId)]);
+
+export const emailRegistration = pgTable('email_registrations', {
+  email: text('email').primaryKey(), codeHash: text('code_hash').notNull(), attempts: integer('attempts').default(0).notNull(), expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
+});
+export const emailCooldown = pgTable('email_cooldowns', { email: text('email').primaryKey(), sentAt: timestamp('sent_at', { withTimezone: true }).notNull() });
